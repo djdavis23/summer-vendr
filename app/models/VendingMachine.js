@@ -26,20 +26,28 @@ class VendingMachine {
   }
 
   addMoney(coin) {
-    //validate coin
-    //  increase total 
-    //return total
+    if (this.acceptableCurrency[coin]) {
+      this.transactionTotal += this.acceptableCurrency[coin];
+    }
+    return this.transactionTotal;
   }
   vend(foodId) {
+    console.log("machine received: " + foodId);
     //find item
+    let product = this.foodItems.find(item => item.id == foodId);
     //if transactionTotal >= item.price && item.quantity > 0
-    //  item.quantity --
-    //  transactionTotal -= item.price
-    //  machineTotal += item.price
-    //return item.img
+    if (this.transactionTotal >= product.price && product.quantity > 0) {
+      product.quantity--;
+      this.transactionTotal -= product.price;
+      this.machineTotal += product.price;
+      return product.img;
+    } else {
+      return 'assets/nogo.png';
+    }
   }
   giveChange() {
-    //transactionTotal = 0
+    this.transactionTotal = 0;
+    return this.transactionTotal;
   }
 
   getItems() {

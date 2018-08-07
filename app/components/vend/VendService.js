@@ -17,12 +17,19 @@ class VendService {
   }
   addMoney(type) {
     console.log('service: ', type)
-    //confirm currency is acceptable
-    if (vm.acceptableCurrency[type]) {
-      //add to total
-      vm.transactionTotal += vm.acceptableCurrency[type]
-    }
-    return vm.transactionTotal.toFixed(2)
+    return vm.addMoney(type).toFixed(2)
+  }
+  purchase(id) {
+    console.log("service received: " + id);
+    return vm.vend(id);
+  }
+
+  getBalance() {
+    return vm.transactionTotal.toFixed(2);
+  }
+
+  getChange() {
+    return vm.giveChange().toFixed(2);
   }
 
 }
